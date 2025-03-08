@@ -7,9 +7,9 @@ file_path = "cities.txt"
 with open(file_path, "r") as file:
     data_list = [line.strip() for line in file]
 
-print(data_list)
-for i in data_list:
-  print(i)
+# print(data_list)
+# for i in data_list:
+#   print(i)
 
 #@title Heuristic and Nodes Dictionary
 heuristic_value = {}
@@ -30,7 +30,7 @@ for a in data_list:
   splitted = []
   splitted = a.split(" ")
   nodes_value[splitted[0]] = [] # shudhu amar current node ta ke key hisebe add korbo dictionary te
-print(nodes_value)
+# print(nodes_value)
 
 #@title Update the Values of Node Dictionary
 
@@ -46,8 +46,8 @@ for a in data_list:
 #@title Update the Values of Node Dictionary
 # print(nodes_value)
 # ekhane amar proti node er child value ache
-for key, value in nodes_value.items():
-  print(f"{key} : {value}")
+# for key, value in nodes_value.items():
+#   print(f"{key} : {value}")
 
 def a_star(priorityQueue, visited, graph, heuristic_value, destination):
   # prothom kaj hocche check kora, jodi amar queue faka hoye jay tahole ami recursion venge dibo
