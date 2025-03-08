@@ -50,13 +50,16 @@ def price_calculation(chromosome_set, history, capita):
 
 
 ## =================== Testing =================== ##
-historical_prediction = [-1.2, 3.4, -0.8, 2.1, -2.5, 1.7, -0.3, 5.8, -1.1, 3.5]
-population = [2, 5, 20]
-price_calculation(population, historical_prediction, 1000)
+# historical_prediction = [-1.2, 3.4, -0.8, 2.1, -2.5, 1.7, -0.3, 5.8, -1.1, 3.5]
+# population = [2, 5, 20]
+# price_calculation(population, historical_prediction, 1000)
 ## =================== Testing =================== ##
 
 def genetic_algorithm(all_chromosomes, capita, generations, history_pred):
   # iteration
+  # ekhane chromose ar tader jonno howa lav store korbo
+  startegy = {}
+
   generation = generations
   chromosome_dictionary = {}
   for i in range (0, len(all_chromosomes)):
@@ -72,7 +75,7 @@ def genetic_algorithm(all_chromosomes, capita, generations, history_pred):
   print(fitness_dictionary)
 
   # fitness dictionary ke sort korbo
-  fitness_dictionary = dict(sorted(fitness_dictionary.items(), key=lambda item: item[1], reverse=True))
+  fitness_dictionary = dict(sorted(fitness_dictionary.items(), key=lambda item: item[1], reverse=False))
   print(fitness_dictionary)
 
   # parent select korlam 2 ta
@@ -80,7 +83,7 @@ def genetic_algorithm(all_chromosomes, capita, generations, history_pred):
     selected_chromosomes = []
     for i in range(2):
       selected_chromosomes.append(fitness_dict.popitem())
-    print(selected_chromosomes)
+    print("selected chromosomes: ", selected_chromosomes)
     return selected_chromosomes
   
   def crossover(parents):
@@ -89,6 +92,9 @@ def genetic_algorithm(all_chromosomes, capita, generations, history_pred):
     child1 = parent1[0][:2] + parent2[0][2:]
     # parent2 er 1st half + parent1 er 2nd half
     child2 = parent2[0][:2] + parent1[0][2:]
+    print("cross over")
+    print("child1: ", child1[0])
+    print("child2: ", child2)
     return child1, child2
   
   def mutation(child):
@@ -97,8 +103,32 @@ def genetic_algorithm(all_chromosomes, capita, generations, history_pred):
     random_number = random.randint(1, 99)
     mutated_child[random_index] = random_number
     return mutated_child
+  
   for i in range(generation):
-    pass
+    print("Generation: ", i)
+    selected_parents = selection(fitness_dictionary)
+    print("Selected parents: ", selected_parents)
+    child1, child2 = crossover(selected_parents)
+    print("Children: ", child1, child2)
+    # mutation rate hobe randomly 5%
+    random_percentage = random.randint(1, 100)
+    if random_percentage >= 50:
+      child1 = mutation(child1)
+      child2 = mutation(child2)
+    print("Mutated children: ", child1, child2)
+
+    # fitness calculation for children
+    print(child1)
+    fitness_dictionary["child1"] = price_calculation(child1, history_pred, capita)
+    fitness_dictionary["child2"] = price_calculation(child2, history_pred, capita)
+    print(fitness_dictionary)
+    # fitness dictionary ke sort korbo
+    fitness_dictionary = dict(sorted(fitness_dictionary.items(), key=lambda item: item[1], reverse=True))
+    print(fitness_dictionary)
+    # ekhane best chromosome store korbo
+    startegy[i] = fitness_dictionary.popitem()
+    print("Best chromosome: ", startegy[i])
+    print("====================================")
 
 
 
