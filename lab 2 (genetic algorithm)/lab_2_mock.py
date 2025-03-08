@@ -107,4 +107,11 @@ def genetic_algorithm(all_chromosomes, capita, generations, history_pred):
 
 # generations = int(input("Enter number of generations: "))
 ### =================== input =================== ###
+
+## =================== Testing  case =================== ##
 historical_prediction = [-1.2, 3.4, -0.8, 2.1, -2.5, 1.7, -0.3, 5.8, -1.1, 3.5]
+initial_capita = 1000
+initial_population = [[2, 5, 20], [3, 7, 30], [1.5, 4, 25], [2.5, 6, 15]]
+generations = 10
+## =================== Testing  case =================== ##
+genetic_algorithm(initial_population, initial_capita, generations, historical_prediction)
