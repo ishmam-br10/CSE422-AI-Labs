@@ -51,9 +51,12 @@ def price_calculation(chromosome_set, history, capita):
 
   return fitness
 
+
+## =================== Testing =================== ##
 historical_prediction = [-1.2, 3.4, -0.8, 2.1, -2.5, 1.7, -0.3, 5.8, -1.1, 3.5]
 population = [2, 5, 20]
 price_calculation(population, historical_prediction, 1000)
+## =================== Testing =================== ##
 
 def genetic_algorithm(all_chromosomes, capita, generations, history_pred):
   # iteration
@@ -70,5 +73,38 @@ def genetic_algorithm(all_chromosomes, capita, generations, history_pred):
   fitness_dictionary["chromosome3"] = price_calculation(all_chromosomes[2], history_pred, capita)
   fitness_dictionary["chromosome4"] = price_calculation(all_chromosomes[3], history_pred, capita)
   print(fitness_dictionary)
-  fitness_dictionary.sort()
+
+  # fitness dictionary ke sort korbo
+  fitness_dictionary = dict(sorted(fitness_dictionary.items(), key=lambda item: item[1], reverse=True))
   print(fitness_dictionary)
+
+
+
+### =================== input =================== ###
+# capita = int(input("Enter initial capital: "))
+# historical_prediction = []
+
+# # taking input for historical prediction
+# print("Enter historical prediction one by one: ")
+
+# for i in range(10):
+#   historical_prediction.append(float(input("Enter historical prediction: ")))
+# print("Historical prediction: ", historical_prediction)
+# initial_population = []
+
+# ## taking input for initial population
+# print("Enter initial population one by one: ")
+# for i in range (4):
+#   chromosome = []
+#   stop_loss = float(input("Enter stop loss: "))
+#   take_profit = float(input("Enter take profit: "))
+#   trade_size = float(input("Enter trade size: "))
+#   chromosome.append(stop_loss)
+#   chromosome.append(take_profit)
+#   chromosome.append(trade_size)
+#   initial_population.append(chromosome)
+# print("Initial population: ", initial_population)
+
+# generations = int(input("Enter number of generations: "))
+### =================== input =================== ###
+historical_prediction = [-1.2, 3.4, -0.8, 2.1, -2.5, 1.7, -0.3, 5.8, -1.1, 3.5]
